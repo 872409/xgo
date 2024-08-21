@@ -9,10 +9,17 @@ import (
 	"strings"
 )
 
+func WithAddress(addr *address.Address) *TonAddress {
+	return &TonAddress{
+		addr: addr,
+	}
+}
+
 func MustParse(addr string) *TonAddress {
 	add, _ := Parse(addr)
 	return add
 }
+
 func Parse(addr string) (*TonAddress, error) {
 	var add *address.Address
 	var err error
