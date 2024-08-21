@@ -1,4 +1,4 @@
-module xgo
+module github.com/872409/xgo
 
 go 1.23.0
 
