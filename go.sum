@@ -77,6 +77,8 @@ github.com/mattn/go-sqlite3 v1.14.15 h1:vfoHhTN1af61xCRSWzFIWzx2YskyMTwHLrExkBOj
 github.com/mattn/go-sqlite3 v1.14.15/go.mod h1:2eHXhiwb8IkHr+BDWZGa96P6+rkvnG63S2DGjv9HUNg=
 github.com/microsoft/go-mssqldb v0.17.0 h1:Fto83dMZPnYv1Zwx5vHHxpNraeEaUlQ/hhHLgZiaenE=
 github.com/microsoft/go-mssqldb v0.17.0/go.mod h1:OkoNGhGEs8EZqchVTtochlXruEhEOaO4S0d2sB5aeGQ=
+github.com/oasisprotocol/curve25519-voi v0.0.0-20220328075252-7dd334e3daae h1:7smdlrfdcZic4VfsGKD2ulWL804a4GVphr4s7WZxGiY=
+github.com/oasisprotocol/curve25519-voi v0.0.0-20220328075252-7dd334e3daae/go.mod h1:hVoHR2EVESiICEMbg137etN/Lx+lSrHPTD39Z/uE+2s=
 github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec=
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/pelletier/go-toml/v2 v2.2.2 h1:aYUidT7k73Pcl9nb2gScu7NSrKCSHIDE89b3+6Wq+LM=
@@ -87,6 +89,8 @@ github.com/prashantv/gostub v1.1.0 h1:BTyx3RfQjRHnUWaGF9oQos79AlQ5k8WNktv7VGvVH4
 github.com/prashantv/gostub v1.1.0/go.mod h1:A5zLQHz7ieHGG7is6LLXLz7I8+3LZzsrV0P1IAHhP5U=
 github.com/rivo/uniseg v0.2.0 h1:S1pD9weZBuJdFmowNwbpi7BJ8TNftyUImj/0WQi72jY=
 github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
+github.com/sigurn/crc16 v0.0.0-20211026045750-20ab5afb07e3 h1:aQKxg3+2p+IFXXg97McgDGT5zcMrQoi0EICZs8Pgchs=
+github.com/sigurn/crc16 v0.0.0-20211026045750-20ab5afb07e3/go.mod h1:9/etS5gpQq9BJsJMWg1wpLbfuSnkm8dPF6FdW2JXVhA=
 github.com/spaolacci/murmur3 v1.1.0 h1:7c1g84S4BPRrfL5Xrdp6fOJ206sU9y293DDHaoy0bLI=
 github.com/spaolacci/murmur3 v1.1.0/go.mod h1:JwIasOWyU6f++ZhiEuf87xNszmSA2myDM2Kzu9HwQUA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
@@ -100,6 +104,8 @@ github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
 github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/xssnick/tonutils-go v1.9.9 h1:J0hVJI4LNEFHqgRHzpWTjFuv/Ga89OqLRUc9gxmjCoc=
+github.com/xssnick/tonutils-go v1.9.9/go.mod h1:p1l1Bxdv9sz6x2jfbuGQUGJn6g5cqg7xsTp8rBHFoJY=
 github.com/zeromicro/go-zero v1.7.0 h1:B+y7tUVlo3qVQ6F0I0R9bi+Dq4I1QdO9ZB+dz1r0p1s=
 github.com/zeromicro/go-zero v1.7.0/go.mod h1:ypW4PzQI+jUrMcNJDDQ+7YW+pE+tMua9Xj/pmtmS1Dc=
 go.opentelemetry.io/otel v1.24.0 h1:0LAOdjNmQeSTzGBzduGe/rU4tZhMwL5rWgtp9Ku5Jfo=

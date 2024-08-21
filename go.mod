@@ -1,9 +1,12 @@
 module github.com/872409/xgo
 
-go 1.18
+go 1.21
+
+toolchain go1.23.0
 
 require (
 	github.com/gogf/gf/v2 v2.7.2
+	github.com/xssnick/tonutils-go v1.9.9
 	github.com/zeromicro/go-zero v1.7.0
 	gorm.io/gen v0.3.26
 	gorm.io/gorm v1.25.11
@@ -28,15 +31,18 @@ require (
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
+	github.com/oasisprotocol/curve25519-voi v0.0.0-20220328075252-7dd334e3daae // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/sigurn/crc16 v0.0.0-20211026045750-20ab5afb07e3 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.24.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.24.0 // indirect
 	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	go.uber.org/automaxprocs v1.5.3 // indirect
+	golang.org/x/crypto v0.25.0 // indirect
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.27.0 // indirect
 	golang.org/x/sync v0.7.0 // indirect
