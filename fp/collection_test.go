@@ -16,4 +16,8 @@ func TestFind(t *testing.T) {
 
 func TestIncludes(t *testing.T) {
 
+	s := []any{1, 2, 3, 1, 2, 2, 2, 4, 2, 2, 2, 2, 2}
+	r2 := Chunk(s, 2)
+	fmt.Println(r2)
+
 }

@@ -1,6 +1,6 @@
 module github.com/872409/xgo
 
-go 1.23.0
+go 1.18
 
 require (
 	github.com/gogf/gf/v2 v2.7.2
