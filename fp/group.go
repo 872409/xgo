@@ -16,11 +16,11 @@ func GroupBy[T any, K comparable](items []T, getProperty func(T) K) map[K][]T {
 	return grouped
 }
 
-func SliceShuffle(a []any) {
+func SliceShuffle[T any](a []T) {
 	rand.Shuffle(len(a), func(i, j int) { a[i], a[j] = a[j], a[i] })
 }
 
-func SliceShuffleRand(r *rand.Rand, a []any) {
+func SliceShuffleRand[T any](r *rand.Rand, a []T) {
 	if r == nil {
 		r = rand.New(rand.NewSource(time.Now().Unix()))
 	}
