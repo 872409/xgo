@@ -26,7 +26,10 @@ func (e *CodeError) WithStack(skips ...int) *withStack {
 
 func (e *CodeError) Append(format string, val ...any) *CodeError {
 	msg := fmt.Sprintf("%s %s", e.msg, fmt.Sprintf(format, val...))
-	return NewCodeError(e.code, msg)
+	return &CodeError{
+		code: e.code,
+		msg:  msg,
+	}
 }
 
 func (e *CodeError) JoinF(format string, val ...any) error {
@@ -83,15 +86,4 @@ func (e *CodeError) Format(s fmt.State, verb rune) {
 	//case 's', 'q':
 	//	_, _ = io.WriteString(s, e.OutError())
 	//}
-}
-
-// NewCodeError 系统错误
-// code: 错误码
-func NewCodeError(code string, msg string) *CodeError {
-	//c, e := strconv.Atoi(code)
-	//fmt.Println(code, c, e, msg)
-	return &CodeError{
-		code: code,
-		msg:  msg,
-	}
 }

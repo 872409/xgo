@@ -14,28 +14,13 @@ const (
 )
 
 var Default = &channel{channel: "default"}
-var User = &channel{channel: "user"}
-var Prop = &channel{channel: "prop"}
-var UserLevel = &channel{channel: "user_level"}
-var UserProp = &channel{channel: "user_prop"}
-var UserEarning = &channel{channel: "user_earning"}
-var Team = &channel{channel: "team"}
-var Game = &channel{channel: "game"}
-var Mine = &channel{channel: "mine"}
-var Task = &channel{channel: "task"}
-var Wallet = &channel{channel: "wallet"}
-var Family = &channel{channel: "family"}
-var Bot = &channel{channel: "bot"}
-var Ton = &channel{channel: "ton"}
-var SystemConfig = &channel{channel: "system_config"}
-var Rank = &channel{channel: "rank"}
-var RedisToSql = &channel{channel: "redisToSql"}
-var ReportData = &channel{channel: "report_data"}
-var Ad = &channel{channel: "ad"}
-var Heist = &channel{channel: "heist"}
 
 type channel struct {
 	channel string
+}
+
+func NewChannel(name string) *channel {
+	return &channel{channel: name}
 }
 
 var logMaps = new(sync.Map)

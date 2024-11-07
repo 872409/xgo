@@ -3,11 +3,10 @@ package xerr
 import (
 	"errors"
 	"fmt"
-	"github.com/zeromicro/go-zero/core/logx"
 	"gorm.io/gen"
 	"gorm.io/gorm"
 	"strings"
-	"xgo/xlog"
+	"sync"
 )
 
 // OK 成功返回
@@ -17,65 +16,23 @@ import (
 
 // GLOBAL 全局错误码
 var (
-	GLOBAL                  = "100"
-	RPCError                = internalNewCodeError(GLOBAL+"000", "internal error")
-	ServerCommonError       = internalNewCodeError(GLOBAL+"001", "common error")
-	RequestParamError       = internalNewCodeError(GLOBAL+"002", "param error")
-	DomainInvalid           = internalNewCodeError(GLOBAL+"003", "domain invalid")
-	RequestContentTypeError = internalNewCodeError(GLOBAL+"004", "content-type error")
-
-	DataBaseError          = internalNewCodeError(GLOBAL+"201", "Db OutError")
-	DataBaseRecordNotFound = internalNewCodeError(GLOBAL+"202", "record not found")
-	DataBaseUpdateError    = internalNewCodeError(GLOBAL+"203", "Db Update OutError")
-	SignError              = internalNewCodeError(GLOBAL+"007", "sign error")
-	LockError              = internalNewCodeError(GLOBAL+"008", "lock error")
-	ChainError             = internalNewCodeError(GLOBAL+"009", "chain error")
-	CurrencyDecodeError    = internalNewCodeError(GLOBAL+"010", "currency decode error")
-
-	TokenInvalid       = internalNewCodeError(GLOBAL+"100", "token invalid")
-	TokenExpireError   = internalNewCodeError(GLOBAL+"101", "token is expired")
-	TokenGenerateError = internalNewCodeError(GLOBAL+"102", "token Generate OutError")
-	TOTPCodeInvalid    = internalNewCodeError(GLOBAL+"103", "OTP code invalid")
+	GLOBAL              = "100"
+	DataBaseUpdateError = NewCodeError(GLOBAL+"203", "Db Update OutError")
 )
+var message = &sync.Map{}
 
-var (
-	USER          = "300"
-	UserNotExists = internalNewCodeError(USER+"001", "user not exits")
-)
-
-var (
-	Game              = "400"
-	NoFreeGameNumProp = internalNewCodeError(Game+"001", "NoFreeGameNumProp")
-)
-
-var (
-	System      = "200"
-	LevelConfig = internalNewCodeError(System+"001", "LevelConfig not exits")
-)
-
-//
-//var (
-//	Exchange                 = "300"
-//	ExchangeAmountMinLimited = internalNewCodeError(Exchange+"001", "min amount limited")
-//	ExchangeAmountMaxLimited = internalNewCodeError(Exchange+"002", "max amount limited")
-//)
-
-var message map[string]string
-
-// internalNewCodeError 系统错误
+// NewCodeError 系统错误
 // code: 错误码
 
-func internalNewCodeError(code string, msg string) *CodeError {
-	if message == nil {
-		message = map[string]string{}
-	}
+func NewCodeError(code string, msg string) *CodeError {
+
 	//c, e := strconv.Atoi(code)
 	//fmt.Println(code, c, e, msg)
-	if _, f := message[code]; f {
+	if _, f := message.Load(code); f {
 		panic(fmt.Sprintf("code:%s exists,msg:%s", code, msg))
 	}
 
-	message[code] = msg
+	message.Store(code, msg)
 
 	return &CodeError{
 		code: code,
@@ -84,7 +41,7 @@ func internalNewCodeError(code string, msg string) *CodeError {
 }
 
 func IsCodeErr(errCode string) bool {
-	if _, ok := message[errCode]; ok {
+	if _, ok := message.Load(errCode); ok {
 		return true
 	} else {
 		return false
@@ -108,7 +65,6 @@ DbSelectError
 */
 func DbSelectError(err error) error {
 	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
-		xlog.Default.Error(err.Error(), err)
 		return err
 	}
 	if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -124,8 +80,6 @@ func DbUpdateError(result gen.ResultInfo, appendErrorMsg ...string) error {
 			appendMsg = strings.Join(appendErrorMsg, " ")
 		}
 		err := DataBaseUpdateError.WithStack(5).Join(result.Error, fmt.Errorf("%s OutError:%+v,RowsAffected:%d", appendMsg, result.Error, result.RowsAffected))
-
-		logx.Error(err)
 
 		return err
 	}
