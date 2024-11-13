@@ -3,11 +3,11 @@ package tonclient
 import (
 	"context"
 	"fmt"
+	"github.com/872409/xgo/xutils"
 	"github.com/xssnick/tonutils-go/address"
 	"github.com/xssnick/tonutils-go/tlb"
 	"github.com/xssnick/tonutils-go/ton"
 	"log"
-	"main/comm/xutils"
 	"math/big"
 	"time"
 )
