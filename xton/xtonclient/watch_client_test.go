@@ -53,18 +53,24 @@ func TestJetton(t *testing.T) {
 	}
 
 	fmt.Println(err)
-	watchAddress := address.MustParseAddr("UQAJWmeBW1--sX5BAoCrw-2QlVJh_IiDSCSdI5snJwDht6bP")
+	//watchAddress := address.MustParseAddr("UQAJWmeBW1--sX5BAoCrw-2QlVJh_IiDSCSdI5snJwDht6bP")
+	watchAddress := address.MustParseAddr("UQD5vcDeRhwaLgAvralVC7sJXI-fc2aNcMUXqcx-BQ-OWi5c")
 	//watchAddress := address.MustParseAddr("EQB88BBo29q9CeUR4I8JQuOId3zqMJiGAHyrhTnmaGdLOX3d")
 	//watchAddress := address.MustParseAddr("UQAZ9CBAryyCtrwvm4kkNYx69hf8mL4M7FkBoIj0iui94S5s")
 	// address on which we are accepting payments
 	treasuryAddress := watchAddress
 
-	usdt := jetton.NewJettonMasterClient(api, address.MustParseAddr("EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"))
+	jettonMasterClient := jetton.NewJettonMasterClient(api, address.MustParseAddr("EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs"))
+
 	// get our jetton wallet address
-	treasuryJettonWallet, err := usdt.GetJettonWalletAtBlock(context.Background(), treasuryAddress, master)
+	treasuryJettonWallet, err := jettonMasterClient.GetJettonWalletAtBlock(context.Background(), treasuryAddress, master)
+	balance, e := treasuryJettonWallet.GetBalance(context.Background())
+	fmt.Println("balance: ", balance, e)
+	//treasuryJettonWallet2, err2 := usdt.GetJettonWallet(context.Background(), treasuryAddress)
+	//fmt.Println("treasuryJettonWallet", treasuryJettonWallet.Address().String(), treasuryJettonWallet2.Address().String(), err2)
 
 	//txMap := make(map[uint64]int)
-	WatchTransactions(ctx, api, watchAddress, 46429334000003, func(tx *tlb.Transaction) {
+	WatchTransactions(ctx, api, watchAddress, 50857862000003, func(tx *tlb.Transaction) {
 		//fmt.Println("tx:", tx.LT, tx.IO.In.MsgType)
 		//d := tx.Description.Description.(tlb.TransactionDescriptionOrdinary)
 		//computePh, ok := d.ComputePhase.Phase.(tlb.ComputePhaseVM)
@@ -89,7 +95,7 @@ func TestJetton(t *testing.T) {
 			ti := tx.IO.In.AsInternal()
 			src := ti.SrcAddr
 
-			fmt.Println("src", src)
+			//fmt.Println("src", src)
 
 			// verify that sender is our jetton wallet
 			if ti.SrcAddr.Equals(treasuryJettonWallet.Address()) {
@@ -97,19 +103,19 @@ func TestJetton(t *testing.T) {
 				if err = tlb.LoadFromCell(&transfer, ti.Body.BeginParse()); err == nil {
 
 					payloadSlice := transfer.ForwardPayload.BeginParse()
-					payloadOpcode, er := payloadSlice.LoadUInt(32)
-					fmt.Println("payloadOpcode", payloadOpcode, er)
+					payloadOpcode, _ := payloadSlice.LoadUInt(32)
+					//fmt.Println("payloadOpcode", payloadOpcode, er)
 					if payloadOpcode != 0 {
 						return
 					}
 					payloadComment := payloadSlice.MustLoadStringSnake()
-					fmt.Println("payloadComment", payloadComment)
+					//fmt.Println("payloadComment", payloadComment)
 					// convert decimals to 6 for USDT (it can be fetched from jetton details too), default is 9
 					amt := tlb.MustFromNano(transfer.Amount.Nano(), 6)
 
 					// reassign sender to real jetton sender instead of its jetton wallet contract
 					src = transfer.Sender
-					log.Println("received", amt.String(), "USDT from", src.String())
+					log.Println("received", amt.String(), "USDT from", src.String(), payloadComment)
 				}
 			}
 
@@ -181,7 +187,7 @@ func TestName(t *testing.T) {
 
 	getList := func(minTxLT uint64, limit uint32, txLT uint64, txHash []byte) (bool, uint64, []byte, error) {
 		list, err := api.ListTransactions(context.Background(), add, limit, txLT, txHash)
-		fmt.Println(err)
+		fmt.Println("err", err)
 		if err != nil {
 			return false, 0, nil, err
 		}

@@ -2,11 +2,11 @@ package tonclient
 
 import (
 	"context"
+	"fmt"
 	"github.com/xssnick/tonutils-go/address"
 	"github.com/xssnick/tonutils-go/liteclient"
 	"github.com/xssnick/tonutils-go/tlb"
 	"github.com/xssnick/tonutils-go/ton"
-	"log"
 )
 
 func NewClient(ctx context.Context) (*liteclient.ConnectionPool, *ton.APIClient, error) {
@@ -20,12 +20,12 @@ func GetAccount(ctx context.Context, api ton.APIClientWrapped, addr *address.Add
 	// 每次循环，获取一次账号数据
 	b, err := api.CurrentMasterchainInfo(ctx)
 	if err != nil {
-		log.Fatalln("get block err:", err.Error())
+		fmt.Println("get block err:", err.Error())
 		return nil, err
 	}
 	account, err := api.GetAccount(ctx, b, addr)
 	if err != nil {
-		log.Fatalln("get account err:", err.Error())
+		fmt.Println("get account err:", err.Error())
 		return nil, err
 	}
 	return account, err

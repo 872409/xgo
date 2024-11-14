@@ -234,7 +234,7 @@ func SubscribeOnTransactions(workerCtx context.Context, c *ton.APIClient, addr *
 
 		if lastProcessedLT == acc.LastTxLT {
 			// already processed all
-			fmt.Println("already processed all", lastProcessedLT)
+			//fmt.Println("already processed all", lastProcessedLT)
 			continue
 		}
 
@@ -253,7 +253,7 @@ func SubscribeOnTransactions(workerCtx context.Context, c *ton.APIClient, addr *
 			ctx, cancel = context.WithTimeout(workerCtx, 10*time.Second)
 			//fmt.Println("lastLT, lastHash", lastLT, hex.EncodeToString(lastHash))
 			res, err := c.ListTransactions(ctx, addr, 10, lastLT, lastHash)
-			fmt.Println("err,res", err, len(res), errors.Is(err, ton.ErrNoTransactionsWereFound))
+			//fmt.Println("err,res", err, len(res), errors.Is(err, ton.ErrNoTransactionsWereFound))
 			cancel()
 			if err != nil {
 				if errors.Is(err, ton.ErrNoTransactionsWereFound) {
